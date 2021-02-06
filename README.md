@@ -307,3 +307,9 @@ to suggest an improvement to it, please submit a patch via
 [~sumner/public-inbox](https://lists.sr.ht/~sumner/public-inbox) mailing list or
 send the patch directly to me. You can also send an email to the mailing list to
 discuss potential changes.
+
+## Credits
+
+* Thanks to [Adam Sandstedt](https://github.com/AdamSandstedt) for testing the
+  assignment and creating most of the input-output pairs.
+* Thanks to [Sam Sartor](https://samsartor.com) for testing the assignment.
