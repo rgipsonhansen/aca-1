@@ -120,6 +120,21 @@ start a shell with the necessary dependencies installed. If you also use
 environment variables from the Nix shell to your current environment when you
 `cd` to this directory.
 
+### Downloading the Source
+
+If you want to use git on this project, **please use a *private* repo**. Then,
+run the following commands to clone the starter code and set the `origin` to
+your repo:
+```
+git clone https://git.sr.ht/~sumner/aca-project1
+git remote set-url origin <your-private-repo-url>
+```
+
+Alternatively, if you don't want to use Git, you can download a TAR.GZ of the
+source from the following URL:
+http://git.sr.ht/~sumner/aca-project1/archive/master.tar.gz
+
+
 ### Building and Running
 
 You can build the starter code by running `make` from this directory. This will
