@@ -30,6 +30,7 @@ struct replacement_policy {
     // This function should determine which index within the set to evict.
     //
     // Argruments:
+    //  * replacement_policy: the instance of the replacement_policy
     //  * cache_system: pretty self-explanatory, this is a pointer to the cache
     //    system. This pointer should be treated as readonly.
     //  * set_idx: the index of the set that needs a cache line evicted.
@@ -41,6 +42,7 @@ struct replacement_policy {
     // used to update the state of the replacement policy.
     //
     // Argruments:
+    //  * replacement_policy: the instance of the replacement_policy
     //  * cache_system: pretty self-explanatory, this is a pointer to the cache
     //    system. This pointer should be treated as readonly.
     //  * set_idx: the index of the set that is being accessed.
