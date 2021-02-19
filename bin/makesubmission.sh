@@ -10,21 +10,7 @@ printf "Enter your MultiPass username: "
 read username
 filename="${username}-${PROJECT_NAME}.tar.gz"
 tmpdir=$(mktemp -d)
-tar --exclude-vcs-ignores \
-    --exclude-vcs \
-    --exclude .editorconfig \
-    --exclude .envrc \
-    --exclude .gitignore \
-    --exclude .vim \
-    --exclude bin \
-    --exclude cachesim \
-    --exclude expected \
-    --exclude inputs \
-    --exclude README.md \
-    --exclude setup.cfg \
-    --exclude shell.nix \
-    --exclude test_results \
-    -jcf ${tmpdir}/${filename} .
+tar jcf ${tmpdir}/${filename} Makefile src
 mv ${tmpdir}/${filename} .
 echo "${filename} created with the following files:"
-tar tf ${filename}
+tar tfv ${filename}
