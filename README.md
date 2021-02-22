@@ -275,7 +275,6 @@ statistics must be output in order:
 * Misses (int): the total number of cache misses
 * Dirty Evictions (int): the total number of evictions of dirty cache lines
   which would require a write-back.
-* Reads (int): the total number cache lines that are read in.
 * Hit Ratio (float): the ratio of cache hits to total accesses
 
 The Hit Ratio should be formatted with 8 decimal places and a leading zero. Each
@@ -287,7 +286,6 @@ OUTPUT ACCESSES 496611
 OUTPUT HITS 494165
 OUTPUT MISSES 2446
 OUTPUT DIRTY EVICTIONS 245
-OUTPUT READS 2446
 OUTPUT HIT RATIO 0.99507462
 ```
 
