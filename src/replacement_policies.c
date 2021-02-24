@@ -18,18 +18,31 @@
 // ============================================================================
 // TODO feel free to create additional structs/enums as necessary
 
+
+
 void lru_cache_access(struct replacement_policy *replacement_policy,
                       struct cache_system *cache_system, uint32_t set_idx, uint32_t tag)
 {
-    // TODO update the LRU replacement policy state given a new memory access
+	for(int i = 0; i < cache_system->associativity; i++){
+		if(tag == cache_system->cache_lines[i + cache_system->associativity *set_idx].tag){
+			cache_system->cache_lines[i + cache_system->associativity *set_idx].usage = replacement_policy.timer;
+		}
+	}
+	replacement_policy.timer++;
 }
 
 uint32_t lru_eviction_index(struct replacement_policy *replacement_policy,
                             struct cache_system *cache_system, uint32_t set_idx)
 {
-    // TODO return the index within the set that should be evicted.
-
-    return 0;
+	unsigned long int min = 0;
+	uint32_t min_address = 0;
+	for(int i = 0; i < cache_system->associativity; i++){
+		if(cache_lines[i + cache_system->associativity *set_idx].usage <= min){
+			min_address = i;
+			min = cache_lines[i + cache_system->associativity *set_idx].usage;
+		}
+	}
+    return min_address;
 }
 
 void lru_replacement_policy_cleanup(struct replacement_policy *replacement_policy)
@@ -45,6 +58,7 @@ struct replacement_policy *lru_replacement_policy_new(uint32_t sets, uint32_t as
     lru_rp->eviction_index = &lru_eviction_index;
     lru_rp->cleanup = &lru_replacement_policy_cleanup;
 
+	lru_rp->timer = 0;
     // TODO allocate any additional memory to store metadata here and assign to
     // lru_rp->data.
 

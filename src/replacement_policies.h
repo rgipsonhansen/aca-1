@@ -60,7 +60,7 @@ struct replacement_policy {
     void (*cleanup)(struct replacement_policy *replacement_policy);
 
     // Use this pointer to store any data for the replacement policy.
-    void *data;
+    unsigned long int timer;
 };
 
 // Constructors for each of the replacement policies.

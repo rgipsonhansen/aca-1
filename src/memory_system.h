@@ -34,6 +34,7 @@ enum cache_status {
 struct cache_line {
     uint32_t tag;
     enum cache_status status;
+	unsigned long int usage;
 };
 
 // This struct contains the data related to a cache system.
