@@ -110,7 +110,7 @@ void cache_system_mem_access(struct cache_system *cache_system, uint32_t address
 struct cache_line *cache_system_find_cache_line(struct cache_system *cache_system, uint32_t set_idx,
                                                 uint32_t tag)
 {
-    for(int i = 0; i < cache->associativity; i++){
+    for(int i = 0; i < cache_system->associativity; i++){
 		if(tag == cache_system->cache_lines[i + cache_system->associativity *set_idx].tag){
 			return &cache_system->cache_lines[i + cache_system->associativity *set_idx];
 		}
