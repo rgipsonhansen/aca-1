@@ -124,7 +124,7 @@ uint32_t lru_prefer_clean_eviction_index(struct replacement_policy *replacement_
 	unsigned long int min = -1;
 	uint32_t min_address = 0;
 	for(int i = 0; i < cache_system->associativity; i++){
-		if(cache_system->cache_lines[i + cache_system->associativity *set_idx].usage <= min && cache_system->cache_lines[i + cache_system->associativity *set_idx].cache_status == EXCLUSIVE){
+		if(cache_system->cache_lines[i + cache_system->associativity *set_idx].usage <= min && cache_system->cache_lines[i + cache_system->associativity *set_idx].status == EXCLUSIVE){
 			min_address = i;
 			min = cache_system->cache_lines[i + cache_system->associativity *set_idx].usage;
 			exclusive_found = 1;
