@@ -43,6 +43,7 @@ uint32_t lru_eviction_index(struct replacement_policy *replacement_policy,
 		}
 	}
     return min_address;
+
 }
 
 void lru_replacement_policy_cleanup(struct replacement_policy *replacement_policy)
@@ -108,17 +109,37 @@ void lru_prefer_clean_cache_access(struct replacement_policy *replacement_policy
                                    struct cache_system *cache_system, uint32_t set_idx,
                                    uint32_t tag)
 {
-    // TODO update the LRU_PREFER_CLEAN replacement policy state given a new
-    // memory access
-    // NOTE: you may be able to share code with the LRU policy
+	for(int i = 0; i < cache_system->associativity; i++){
+		if(tag == cache_system->cache_lines[i + cache_system->associativity *set_idx].tag){
+			cache_system->cache_lines[i + cache_system->associativity *set_idx].usage = replacement_policy->timer;
+		}
+	}
+	replacement_policy->timer++;
 }
 
 uint32_t lru_prefer_clean_eviction_index(struct replacement_policy *replacement_policy,
                                          struct cache_system *cache_system, uint32_t set_idx)
 {
-    // TODO return the index within the set that should be evicted.
-
-    return 0;
+	int exclusive_found = 0;
+	unsigned long int min = -1;
+	uint32_t min_address = 0;
+	for(int i = 0; i < cache_system->associativity; i++){
+		if(cache_system->cache_lines[i + cache_system->associativity *set_idx].usage <= min && cache_system->cache_lines[i + cache_system->associativity *set_idx].cache_status == EXCLUSIVE){
+			min_address = i;
+			min = cache_system->cache_lines[i + cache_system->associativity *set_idx].usage;
+			exclusive_found = 1;
+		}
+	}
+	if(exclusive_found){
+		return min_address;
+	}
+	for(int i = 0; i < cache_system->associativity; i++){
+		if(cache_system->cache_lines[i + cache_system->associativity *set_idx].usage <= min){
+			min_address = i;
+			min = cache_system->cache_lines[i + cache_system->associativity *set_idx].usage;
+		}
+	}
+	return min_address;
 }
 
 void lru_prefer_clean_replacement_policy_cleanup(struct replacement_policy *replacement_policy)
