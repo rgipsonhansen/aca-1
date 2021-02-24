@@ -34,7 +34,7 @@ void lru_cache_access(struct replacement_policy *replacement_policy,
 uint32_t lru_eviction_index(struct replacement_policy *replacement_policy,
                             struct cache_system *cache_system, uint32_t set_idx)
 {
-	unsigned long int min = 0;
+	unsigned long int min = -1;
 	uint32_t min_address = 0;
 	for(int i = 0; i < cache_system->associativity; i++){
 		if(cache_system->cache_lines[i + cache_system->associativity *set_idx].usage <= min){
