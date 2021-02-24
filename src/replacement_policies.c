@@ -25,10 +25,10 @@ void lru_cache_access(struct replacement_policy *replacement_policy,
 {
 	for(int i = 0; i < cache_system->associativity; i++){
 		if(tag == cache_system->cache_lines[i + cache_system->associativity *set_idx].tag){
-			cache_system->cache_lines[i + cache_system->associativity *set_idx].usage = replacement_policy.timer;
+			cache_system->cache_lines[i + cache_system->associativity *set_idx].usage = replacement_policy->timer;
 		}
 	}
-	replacement_policy.timer++;
+	replacement_policy->timer++;
 }
 
 uint32_t lru_eviction_index(struct replacement_policy *replacement_policy,
@@ -37,9 +37,9 @@ uint32_t lru_eviction_index(struct replacement_policy *replacement_policy,
 	unsigned long int min = 0;
 	uint32_t min_address = 0;
 	for(int i = 0; i < cache_system->associativity; i++){
-		if(cache_lines[i + cache_system->associativity *set_idx].usage <= min){
+		if(cache_system->cache_lines[i + cache_system->associativity *set_idx].usage <= min){
 			min_address = i;
-			min = cache_lines[i + cache_system->associativity *set_idx].usage;
+			min = cache_system->cache_lines[i + cache_system->associativity *set_idx].usage;
 		}
 	}
     return min_address;
