@@ -62,9 +62,8 @@ void rand_cache_access(struct replacement_policy *replacement_policy,
 uint32_t rand_eviction_index(struct replacement_policy *replacement_policy,
                              struct cache_system *cache_system, uint32_t set_idx)
 {
-    // TODO return the index within the set that should be evicted.
-
-    return 0;
+    srand((unsigned) time(0));
+    return rand() % cache_system->associativity;
 }
 
 void rand_replacement_policy_cleanup(struct replacement_policy *replacement_policy)
