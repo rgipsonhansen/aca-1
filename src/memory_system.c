@@ -111,8 +111,8 @@ struct cache_line *cache_system_find_cache_line(struct cache_system *cache_syste
                                                 uint32_t tag)
 {
     for(int i = 0; i < cache->associativity; i++){
-		if(tag == &cache_system->cache_lines[i + cache->associativity *set_idx].tag){
-			return &cache_system->cache_lines[i + cache->associativity *set_idx];
+		if(tag == cache_system->cache_lines[i + cache_system->associativity *set_idx].tag){
+			return &cache_system->cache_lines[i + cache_system->associativity *set_idx];
 		}
 	}
     return NULL;
